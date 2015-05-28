@@ -22,13 +22,13 @@ namespace BowlingGame
             int frameIndex = 0;
             for (int frame = 0; frame < 10; frame++)
             {
-                if (rolls[frameIndex] + rolls[frameIndex + 1] == 10)
+                if (IsSpare(frameIndex))
                 {
-                    score += 10 + rolls[frameIndex + 2];
+                    score += 10 + SpareBonus(frameIndex);
                 }
                 else
                 {
-                    score += rolls[frameIndex] + rolls[frameIndex + 1];
+                    score += FramePins(frameIndex);
                 }
                 frameIndex += 2;
             }
@@ -48,6 +48,21 @@ namespace BowlingGame
             {
                 throw new ArgumentException("A single roll cannot knock down more than 10 pins.");
             }
+        }
+
+        private int FramePins(int frameIndex)
+        {
+            return rolls[frameIndex] + rolls[frameIndex + 1];
+        }
+
+        private Boolean IsSpare(int frameIndex)
+        {
+            return rolls[frameIndex] + rolls[frameIndex + 1] == 10;
+        }
+
+        private int SpareBonus(int frameIndex)
+        {
+            return rolls[frameIndex + 2];
         }
     }
 }
