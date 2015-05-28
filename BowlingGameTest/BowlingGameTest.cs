@@ -36,6 +36,13 @@ namespace BowlingGameTest
             g.Roll(11);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Only 10 pins can be knocked down in a single frame.")]
+        public void TestFrameRollsMoreThanTenPinsThrowsException()
+        {
+            RollMany(2, 9);
+        }
+
         private void RollMany(int rolls, int pins)
         {
             for (int i = 0; i < rolls; i++)
