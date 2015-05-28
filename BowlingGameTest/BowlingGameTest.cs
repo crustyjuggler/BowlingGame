@@ -29,6 +29,13 @@ namespace BowlingGameTest
             Assert.AreEqual(20, g.Score());
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "A single roll cannot knock down more than 10 pins.")]
+        public void TestRollGreaterThanTenThrowsException()
+        {
+            g.Roll(11);
+        }
+
         private void RollMany(int rolls, int pins)
         {
             for (int i = 0; i < rolls; i++)

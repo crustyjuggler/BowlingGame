@@ -12,6 +12,10 @@ namespace BowlingGame
 
         public void Roll(int pins)
         {
+            if (pins > 10)
+            {
+                throw new ArgumentException("A single roll cannot knock down more than 10 pins.");
+            }
             rolls.Add(pins);
         }
 
