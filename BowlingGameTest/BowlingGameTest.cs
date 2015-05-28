@@ -62,6 +62,15 @@ namespace BowlingGameTest
             Assert.AreEqual(27, g.Score());
         }
 
+        [TestMethod]
+        public void TestRollSpareInFinalFrame()
+        {
+            RollMany(18, 0);
+            RollSpare();
+            g.Roll(1);
+            Assert.AreEqual(11, g.Score());
+        }
+
         private void RollMany(int rolls, int pins)
         {
             for (int i = 0; i < rolls; i++)
