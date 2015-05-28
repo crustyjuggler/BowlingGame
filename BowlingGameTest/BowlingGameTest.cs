@@ -43,6 +43,15 @@ namespace BowlingGameTest
             RollMany(2, 9);
         }
 
+        [TestMethod]
+        public void TestRollSingleSpare()
+        {
+            RollMany(2, 5);
+            g.Roll(1);
+            RollMany(17, 0);
+            Assert.AreEqual(12, g.Score());
+        }
+
         private void RollMany(int rolls, int pins)
         {
             for (int i = 0; i < rolls; i++)
