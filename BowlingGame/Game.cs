@@ -12,21 +12,35 @@ namespace BowlingGame
 
         public void Roll(int pins)
         {
-            if (pins > 10)
-            {
-                throw new ArgumentException("A single roll cannot knock down more than 10 pins.");
-            }
+            ValidateRoll(pins);
             rolls.Add(pins);
         }
 
         public int Score()
         {
             int score = 0;
-            for (int i = 0; i < rolls.Count; i++)
+            int frameIndex = 0;
+            for (int frame = 0; frame < 10; frame++)
             {
-                score += rolls[i];
+                score += rolls[frameIndex] + rolls[frameIndex + 1];
+                frameIndex += 2;
             }
             return score;
+        }
+
+        private void ValidateRoll(int pins)
+        {
+            if (rolls.Count % 2 > 0 && rolls.Count < 20)
+            {
+                if (rolls[rolls.Count - 1] + pins > 10)
+                {
+                    throw new ArgumentException("Only 10 pins can be knocked down in a single frame.");
+                }
+            }
+            if (pins > 10)
+            {
+                throw new ArgumentException("A single roll cannot knock down more than 10 pins.");
+            }
         }
     }
 }
