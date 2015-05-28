@@ -46,10 +46,20 @@ namespace BowlingGameTest
         [TestMethod]
         public void TestRollSingleSpare()
         {
-            RollMany(2, 5);
+            RollSpare();
             g.Roll(1);
             RollMany(17, 0);
             Assert.AreEqual(12, g.Score());
+        }
+
+        [TestMethod]
+        public void TestRollTwoSpares()
+        {
+            RollSpare();
+            RollSpare();
+            g.Roll(1);
+            RollMany(15, 0);
+            Assert.AreEqual(27, g.Score());
         }
 
         private void RollMany(int rolls, int pins)
@@ -58,6 +68,11 @@ namespace BowlingGameTest
             {
                 g.Roll(pins);
             }
+        }
+
+        private void RollSpare()
+        {
+            RollMany(2, 5);
         }
     }
 }
