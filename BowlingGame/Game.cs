@@ -22,15 +22,21 @@ namespace BowlingGame
             int frameIndex = 0;
             for (int frame = 0; frame < 10; frame++)
             {
-                if (IsSpare(frameIndex))
+                if (rolls[frameIndex] == 10)
+                {
+                    score += 10 + rolls[frameIndex + 1] + rolls[frameIndex + 2];
+                    frameIndex++;
+                }
+                else if (IsSpare(frameIndex))
                 {
                     score += 10 + SpareBonus(frameIndex);
+                    frameIndex += 2;
                 }
                 else
                 {
                     score += FramePins(frameIndex);
-                }
-                frameIndex += 2;
+                    frameIndex += 2;
+                }                
             }
             return score;
         }
@@ -39,7 +45,7 @@ namespace BowlingGame
         {
             if (rolls.Count % 2 > 0 && rolls.Count < 20)
             {
-                if (rolls[rolls.Count - 1] + pins > 10)
+                if ((rolls[rolls.Count - 1] < 10) && (rolls[rolls.Count - 1] + pins > 10))
                 {
                     throw new ArgumentException("Only 10 pins can be knocked down in a single frame.");
                 }
