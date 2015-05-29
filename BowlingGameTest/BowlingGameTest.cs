@@ -99,6 +99,13 @@ namespace BowlingGameTest
             Assert.AreEqual(12, g.Score());
         }
 
+        [TestMethod]
+        public void TestRollPerfectGame()
+        {
+            RollMany(12, 10);
+            Assert.AreEqual(300, g.Score());
+        }
+
         private void RollMany(int rolls, int pins)
         {
             for (int i = 0; i < rolls; i++)
